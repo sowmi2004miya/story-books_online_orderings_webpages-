@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adult Books - PageTurners</title>
+    <style>
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: rgb(34, 8, 90);
+        }
+
+        .book-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+            color: #1c6dd0; /* Change color to make it stand out */
+            text-transform: uppercase; /* Make heading uppercase */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Add subtle shadow */
+            letter-spacing: 2px; /* Add letter spacing */
+        }
+
+        .book-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .book {
+            background-color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+
+        .book:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .book img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .book h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .book p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .book .price {
+            font-size: 16px;
+            color: green;
+        }
+
+        .book .discount {
+            font-size: 14px;
+            color: red;
+            text-decoration: line-through;
+        }
+
+        .book button {
+            padding: 10px;
+            background-color: #1c6dd0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .book button:hover {
+            background-color: rgb(18, 63, 107);
+        }
+        .stars {
+            color: gold;
+        }
+
+
+        .selected-item {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #eee;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        /* Responsive design */
+        @media screen and (max-width: 768px) {
+            .book-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .book {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+        }
+
+        .overlay {
+            display: block; /* Make sure the overlay is displayed when active */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .confirmation-dialog {
+            display: block; /* Make sure the dialog is displayed when active */
+            position: fixed;
+            left: 50%;
+            width:80%;
+            border-radius:5px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .confirmation-dialog img {
+            max-width: 100px;
+            margin: 10px 0;
+        }
+
+        .confirmation-dialog button {
+            background-color: #1c6dd0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        .confirmation-dialog button:hover {
+            background-color: #0a326f;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="book-section">
+        <h1>Adult Books</h1>
+        <h3>Welcome,</h3>
+        <br/>
+        
+        <!-- List of Books -->
+        <div class="book-list">
+            <!-- Book 1 -->
+            <div class="book">
+                <img src="./image/b2.jpg" alt="Book 2">
+                <h3>The Silent Patient</h3>
+                <p class="price">$100</p>
+                <p class="discount">$240</p>
+                <div class="stars">★★★★☆</div>
+
+                <button class="buy-btn" onclick="confirmPurchase('The Silent Patient', 100, './image/b2.jpg')">Buy</button>
+            </div>
+
+            <!-- Book 2 -->
+            <div class="book">
+                <img src="./image/bk1.jpg" alt="Book 1">
+                <h3>The Old Man And The Sea</h3>
+                <p class="price">$175</p>
+                <p class="discount">$230</p>
+                <div class="stars">★★★★☆</div>
+                <button class="buy-btn" onclick="confirmPurchase('The Da Vinci Code', 175, './image/bk1.jpg')">Buy</button>
+            </div>
+
+            <!-- Book 3 -->
+            <div class="book">
+                <img src="./image/b3.jpg" alt="Book 3">
+                <h3>The Night Circus</h3>
+                <p class="price">$100</p>
+                <p class="discount">$280</p>
+                <div class="stars">★★★★☆</div>
+                <button class="buy-btn" onclick="confirmPurchase('The Night Circus', 100, './image/b3.jpg')">Buy</button>
+            </div>
+
+            <!-- Book 4 -->
+            <div class="book">
+                <img src="./image/b4.jpeg" alt="Book 4">
+                <h3>Big Little Lies</h3>
+                <p class="price">$165</p>
+                <p class="discount">$220</p>
+                <div class="stars">★★★★☆</div>
+                <button class="buy-btn" onclick="confirmPurchase('Big Little Lies', 165, './image/b4.jpeg')">Buy</button>
+            </div>
+
+            <!-- Book 5 -->
+            <div class="book">
+                <img src="./image/b5.jpg" alt="Book 5">
+                <h3>The Girl on the Train</h3>
+                <p class="price">$100</p>
+                <p class="discount">$180</p>
+                <div class="stars">★★★★☆</div>
+                <button class="buy-btn" onclick="confirmPurchase('The Girl on the Train', 100, './image/b5.jpg')">Buy</button>
+            </div>
+        </div>
+
+        <!-- Selected Item -->
+        <div class="selected-item" id="selected-item">
+            <h3>Your Selected Item</h3>
+            <p id="item-name">Book Name</p>
+            <p id="item-price">Price</p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for Buy button confirmation dialog
+
+        // Function to show the confirmation dialog
+        function showConfirmationDialog(bookName, bookPrice, bookImg) {
+            const overlay = document.createElement('div');
+            overlay.classList.add('overlay');
+            document.body.appendChild(overlay);
+
+            const dialog = document.createElement('div');
+            dialog.classList.add('confirmation-dialog');
+            dialog.innerHTML = `
+                <h2>Confirm Purchase</h2>
+                
+                <p>Do you want to buy "${bookName}" for $${bookPrice}?</p>
+                <button id="confirm-btn">Yes</button>
+                <button id="cancel-btn">No</button>
+            `;
+            document.body.appendChild(dialog);
+
+            // Confirm button event
+            document.getElementById('confirm-btn').addEventListener('click', function() {
+                window.location.href = `payment.html?name=${encodeURIComponent(bookName)}&price=${encodeURIComponent(bookPrice)}`;
+            });
+
+            // Cancel button event
+            document.getElementById('cancel-btn').addEventListener('click', function() {
+                document.body.removeChild(dialog);
+                document.body.removeChild(overlay);
+            });
+
+            overlay.style.display = 'block';
+            dialog.style.display = 'block';
+        }
+
+        // Attach click event to all Buy buttons
+        function confirmPurchase(bookName, bookPrice, bookImg) {
+            showConfirmationDialog(bookName, bookPrice, bookImg);
+        }
+    </script>
+</body>
+</html>

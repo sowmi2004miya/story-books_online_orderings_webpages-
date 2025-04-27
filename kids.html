@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Books - PageTurners</title>
+    <style>
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: rgb(60, 35, 113);
+        }
+
+        .book-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Highlighting the Kids Books heading */
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+            color: #1c6dd0;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .book-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .book {
+            background-color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book:hover {
+            transform: scale(1.05);
+        }
+
+        .book img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .book h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .book p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .book .price {
+            font-size: 16px;
+            color: green;
+        }
+
+        .book .discount {
+            font-size: 14px;
+            color: red;
+            text-decoration: line-through;
+        }
+
+        .book .rating {
+            margin-top: 5px;
+            font-size: 18px;
+            color: gold; /* Gold color for stars */
+        }
+
+        .book button {
+            padding: 10px;
+            background-color: #1c6dd0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .book button:hover {
+            background-color: #250c78;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content img {
+            max-width: 100px; /* Image size */
+            margin: 10px 0;
+        }
+
+        button {
+            margin: 10px;
+        }
+
+        .buy-btn {
+            background-color: #1c6dd0;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .buy-btn:hover {
+            background-color: #0a326f;
+        }
+
+        .modal-button {
+            background-color: #1c6dd0;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-button:hover {
+            background-color: #0a326f;
+        }
+        .confirmation-dialog {
+            display: block; /* Make sure the dialog is displayed when active */
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .confirmation-dialog img {
+            max-width: 10px;
+            margin: 10px 0;
+        }
+
+        .confirmation-dialog button {
+            background-color: #1c6dd0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        .confirmation-dialog button:hover {
+            background-color: #0a326f;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="book-section">
+        <h1>Kids Books</h1>
+        
+        <!-- List of Books -->
+        <div class="book-list">
+            <!-- Book 1 -->
+            <div class="book" data-title="The Little Prince" data-price="499" data-img="./image/book1.jpg">
+                <img src="./image/book1.jpg" alt="The Little Prince">
+                <h3>The Little Prince</h3>
+                <p class="price">$499</p>
+                <p class="discount">$750</p>
+                <div class="rating">★★★★☆</div>
+                <button class="buy-btn" onclick="confirmPurchase(this)">Buy</button>
+            </div>
+
+            <!-- Book 2 -->
+            <div class="book" data-title="Charlotte's Web" data-price="399" data-img="./image/book2.jpeg">
+                <img src="./image/book2.jpeg" alt="Charlotte's Web">
+                <h3>Charlotte's Web</h3>
+                <p class="price">$399</p>
+                <p class="discount">$670</p>
+                <div class="rating">★★★★★</div>
+                <button class="buy-btn" onclick="confirmPurchase(this)">Buy</button>
+            </div>
+
+            <!-- Book 3 -->
+            <div class="book" data-title="Harry Potter" data-price="599" data-img="./image/book3.jpg">
+                <img src="./image/book3.jpg" alt="Harry Potter">
+                <h3>Harry Potter</h3>
+                <p class="price">$599</p>
+                <p class="discount">$890</p>
+                <div class="rating">★★★★★</div>
+                <button class="buy-btn" onclick="confirmPurchase(this)">Buy</button>
+            </div>
+
+            <!-- Book 4 -->
+            <div class="book" data-title="The Gruffalo" data-price="449" data-img="./image/book4.jpg">
+                <img src="./image/book4.jpg" alt="The Gruffalo">
+                <h3>The Gruffalo</h3>
+                <p class="price">$449</p>
+                <p class="discount">$780</p>
+                <div class="rating">★★★★☆</div>
+                <button class="buy-btn" onclick="confirmPurchase(this)">Buy</button>
+            </div>
+
+            <!-- Book 5 -->
+            <div class="book" data-title="Winnie the Pooh" data-price="379" data-img="./image/book5.jpg">
+                <img src="./image/book5.jpg" alt="Winnie the Pooh">
+                <h3>Winnie the Pooh</h3>
+                <p class="price">$379</p>
+                <p class="discount">$600</p>
+                <div class="rating">★★★☆☆</div>
+                <button class="buy-btn" onclick="confirmPurchase(this)">Buy</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirm Purchase</h2>
+            <!-- <img id="confirmationImage" src="" alt="Book Image"> -->
+            <p id="confirmationMessage"></p>
+            <button id="confirmButton" class="modal-button">Yes</button>
+            <button id="cancelButton" class="modal-button">No</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to confirm book purchase
+        function confirmPurchase(button) {
+            const bookElement = button.parentElement;
+            const bookTitle = bookElement.getAttribute('data-title');
+            const bookPrice = bookElement.getAttribute('data-price');
+            const bookImg = bookElement.getAttribute('data-img');
+
+            // Set confirmation message
+            document.getElementById('confirmationMessage').innerText = `Are you sure you want to buy "${bookTitle}" for $${bookPrice}?`;
+            // document.getElementById('confirmationImage').src = bookImg;
+
+            // Show modal
+            document.getElementById('confirmationModal').style.display = "block";
+
+            // Confirm button event
+            document.getElementById('confirmButton').onclick = function() {
+                window.location.href = `payment.html?book=${encodeURIComponent(bookTitle)}`;
+            };
+
+            // Cancel button event
+            document.getElementById('cancelButton').onclick = function() {
+                document.getElementById('confirmationModal').style.display = "none";
+            };
+        }
+
+        // Close modal when clicking outside of the content
+        window.onclick = function(event) {
+            const modal = document.getElementById('confirmationModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+
+</body>
+</html>

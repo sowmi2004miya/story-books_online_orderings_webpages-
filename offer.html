@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageTurners - Offers</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Book Section */
+        .book-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .book-item {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 220px;
+            margin: 15px;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .book-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .book-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .book-item h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #007BFF;
+        }
+
+        .price, .discount, .stars, .description {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .discount {
+            color: red;
+            font-weight: bold;
+        }
+
+        .stars {
+            color: gold;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .buy-btn {
+            background-color: skyblue;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .buy-btn:hover {
+            background-color: #1e90ff;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-button {
+            background-color: #1c6dd0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .modal-button:hover {
+            background-color: #0a326f;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Exclusive Book Offers</h1>
+
+    <div class="book-container">
+        <!-- Book 1 -->
+        <div class="book-item" data-name="The Alchemist" data-price="112.99" data-img="alchemist.jpg">
+            <img src="./image/a3.jpg" alt="The Alchemist">
+            <h3>The Alchemist</h3>
+            <p class="price">$112.99</p>
+            <p class="discount">20% Off</p>
+            <div class="stars">★★★★☆</div>
+            <p class="description">A magical story about following your dreams.</p>
+            <button class="buy-btn">Buy</button>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="book-item" data-name="Harry Potter" data-price="129.99" data-img="harrypotter.jpg">
+            <img src="./image/book3.jpg" alt="Harry Potter">
+            <h3>Harry Potter</h3>
+            <p class="price">$129.99</p>
+            <p class="discount">15% Off</p>
+            <div class="stars">★★★★★</div>
+            <p class="description">Join Harry on his magical journey at Hogwarts.</p>
+            <button class="buy-btn">Buy</button>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="book-item" data-name="1984" data-price="115.99" data-img="1984.jpg">
+            <img src="./image/a1.jpg" alt="1984">
+            <h3>1984</h3>
+            <p class="price">$115.99</p>
+            <p class="discount">10% Off</p>
+            <div class="stars">★★★★★</div>
+            <p class="description">A dystopian novel about totalitarianism.</p>
+            <button class="buy-btn">Buy</button>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="book-item" data-name="The Great Gatsby" data-price="110.99" data-img="gatsby.jpg">
+            <img src="./image/c2.jpeg" alt="The Great Gatsby">
+            <h3>The Great Gatsby</h3>
+            <p class="price">$110.99</p>
+            <p class="discount">25% Off</p>
+            <div class="stars">★★★★☆</div>
+            <p class="description">A classic tale of love and loss in the 1920s.</p>
+            <button class="buy-btn">Buy</button>
+        </div>
+
+        <!-- Book 5 -->
+        <div class="book-item" data-name="To Kill a Mockingbird" data-price="114.99" data-img="mockingbird.jpg">
+            <img src="./image/c4.jpeg" alt="To Kill a Mockingbird">
+            <h3>To Kill a Mockingbird</h3>
+            <p class="price">$114.99</p>
+            <p class="discount">5% Off</p>
+            <div class="stars">★★★★★</div>
+            <p class="description">A profound novel about racial injustice.</p>
+            <button class="buy-btn">Buy</button>
+        </div>
+
+        <!-- Book 6 -->
+        <div class="book-item" data-name="Pride and Prejudice" data-price="190.99" data-img="pride.jpg">
+            <img src="./image/book2.jpeg" alt="Pride and Prejudice">
+            <h3>Pride and Prejudice</h3>
+            <p class="price">$190.99</p>
+            <p class="discount">30% Off</p>
+            <div class="stars">★★★★☆</div>
+            <p class="description">A romantic tale of manners and misunderstandings.</p>
+            <button class="buy-btn">Buy</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirm Purchase</h2>
+            <p id="confirmationMessage"></p>
+            <button id="confirmButton" class="modal-button">Yes</button>
+            <button id="cancelButton" class="modal-button">No</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for Buy Button Confirmation
+        document.querySelectorAll('.buy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const bookItem = this.parentElement;
+                const bookName = bookItem.getAttribute('data-name');
+                const bookPrice = bookItem.getAttribute('data-price');
+                const bookImg = bookItem.getAttribute('data-img');
+
+                // Set confirmation message
+                document.getElementById('confirmationMessage').innerText = `Do you want to buy "${bookName}" for $${bookPrice}?`;
+
+                // Show modal
+                document.getElementById('confirmationModal').style.display = "block";
+
+                // Confirm button event
+                document.getElementById('confirmButton').onclick = function() {
+                    window.location.href = `payment.html?name=${encodeURIComponent(bookName)}&price=${encodeURIComponent(bookPrice)}&img=${encodeURIComponent(bookImg)}`;
+                };
+
+                // Cancel button event
+                document.getElementById('cancelButton').onclick = function() {
+                    document.getElementById('confirmationModal').style.display = "none";
+                };
+            });
+        });
+
+        // Close modal when clicking outside of the content
+        window.onclick = function(event) {
+            const modal = document.getElementById('confirmationModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+
+</body>
+</html>
