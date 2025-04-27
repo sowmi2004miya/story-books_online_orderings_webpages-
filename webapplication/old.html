@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old People Books - PageTurners</title>
+    <style>
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: rgb(34, 8, 90);
+        }
+
+        .book-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+            color: #1c6dd0; /* Change color to make it stand out */
+            text-transform: uppercase; /* Make heading uppercase */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Add subtle shadow */
+            letter-spacing: 2px;
+        }
+
+        .book-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .book {
+            background-color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .book img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .book h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .book p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .book .price {
+            font-size: 16px;
+            color: green;
+        }
+
+        .book .discount {
+            font-size: 14px;
+            color: red;
+            text-decoration: line-through;
+        }
+
+        .book button {
+            padding: 10px;
+            background-color: #1c6dd0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .book button:hover {
+            background-color: rgb(13, 57, 101);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-button {
+            background-color: #1c6dd0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .stars{
+            color:gold;
+        }
+
+        .modal-button:hover {
+            background-color: #0a326f;
+        }
+
+        /* Responsive design */
+        @media screen and (max-width: 768px) {
+            .book-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .book {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="book-section">
+        <h1>Old People's Books</h1>
+        
+        <!-- List of Books -->
+        <div class="book-list">
+            <!-- Book 1 -->
+            <div class="book">
+                <img src="./image/bk1.jpg" alt="Book 1">
+                <h3>The Old Man and the Sea</h3>
+                <p class="price">$120</p>
+                <p class="discount">$150</p>
+                <div class="stars">★★★★☆</div>
+                <button class="buy-btn" onclick="confirmPurchase('The Old Man and the Sea', 120)">Buy</button>
+            </div>
+
+            <!-- Book 2 -->
+            <div class="book">
+                <img src="./image/bk2.jpeg" alt="Book 2">
+                <h3>The Pilgrimage</h3>
+                <p class="price">$180</p>
+                <p class="discount">$220</p>
+                <div class="stars">★★★★☆</div>
+                <button class="buy-btn" onclick="confirmPurchase('The Pilgrimage', 180)">Buy</button>
+            </div>
+
+            <!-- Book 3 -->
+            <div class="book">
+                <img src="./image/bk3.jpeg" alt="Book 3">
+                <h3>To Kill a Mockingbird</h3>
+                <p class="price">$100</p>
+                <p class="discount">$140</p>
+                <div class="stars">★★★★☆</div>
+                <button class="buy-btn" onclick="confirmPurchase('To Kill a Mockingbird', 100)">Buy</button>
+            </div>
+
+            <!-- Book 4 -->
+            <div class="book">
+                <img src="./image/bk4.jpeg" alt="Book 4">
+                <h3>A Man Called Ove</h3>
+                <p class="price">$202</p>
+                <p class="discount">$250</p>
+                <div class="stars">★★★★☆</div>
+                <button class="buy-btn" onclick="confirmPurchase('A Man Called Ove', 202)">Buy</button>
+            </div>
+
+            <!-- Book 5 -->
+            <div class="book">
+                <img src="./image/bk5.jpeg" alt="Book 5">
+                <h3>Memoirs of a Geisha</h3>
+                <p class="price">$150</p>
+                <p class="discount">$190</p>
+                <div class="stars">★★★★☆</div>
+                <button class="buy-btn" onclick="confirmPurchase('Memoirs of a Geisha', 150)">Buy</button>
+            </div>
+        </div>
+
+        <!-- Modal for Confirmation -->
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+                <h2>Confirm Purchase</h2>
+                <p id="confirmationMessage"></p>
+                <button id="confirmButton" class="modal-button">Yes</button>
+                <button id="cancelButton" class="modal-button">No</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to confirm book purchase
+        function confirmPurchase(bookTitle, bookPrice) {
+            // Set confirmation message
+            document.getElementById('confirmationMessage').innerText = `Are you sure you want to buy "${bookTitle}" for $${bookPrice}?`;
+            
+            // Show modal
+            document.getElementById('confirmationModal').style.display = "block";
+
+            // Confirm button event
+            document.getElementById('confirmButton').onclick = function() {
+                window.location.href = `payment.html?name=${encodeURIComponent(bookTitle)}&price=${bookPrice}`;
+            };
+
+            // Cancel button event
+            document.getElementById('cancelButton').onclick = function() {
+                document.getElementById('confirmationModal').style.display = "none";
+            };
+        }
+
+        // Close modal when clicking outside of the content
+        window.onclick = function(event) {
+            const modal = document.getElementById('confirmationModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+    
+</body>
+</html>
